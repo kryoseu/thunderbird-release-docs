@@ -53,3 +53,9 @@
       url: fyi/android_gh_env.md
     - title: Prefer a comm/third_party Python module
       url: fyi/prioritize_comm_syspath.md
+
+- title: Reports
+  url: reports/
+  pages:
+    - title: Releases shipped on schedule
+      url: reports/on-schedule.html

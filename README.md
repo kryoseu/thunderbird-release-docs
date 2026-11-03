@@ -1,6 +1,6 @@
 # Thunderbird Release Docs
 
-Processes, guides and notes for Thunderbird release engineering.
+Processes, guides, notes and reports for Thunderbird release engineering.
 
 - [Release Processes](processes/) — how to perform the standard release
   operations.
@@ -8,6 +8,8 @@ Processes, guides and notes for Thunderbird release engineering.
   automated.
 - [For Your Information](fyi/) — build system and release process
   idiosyncrasies, plus everyday tips.
+- [Reports](reports/) — generated from release data and rebuilt daily, e.g.
+  how often releases ship on schedule.
 
 ## Adding a doc
 
@@ -31,3 +33,13 @@ bundle install && bundle exec jekyll serve --livereload
 ```
 
 Then open <http://localhost:4000>.
+
+The [reports](reports/) are generated rather than committed. To include them in
+a local preview, generate them first (requires
+[uv](https://docs.astral.sh/uv/)):
+
+```sh
+cd reports
+uvx --from git+https://github.com/thunderbird/thunderbird-release-tools \
+    tb-release on-schedule --jekyll
+```

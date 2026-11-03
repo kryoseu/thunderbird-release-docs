@@ -9,10 +9,7 @@ on:
     - cron: "0 6 * * *"  # daily, so the reports pick up new releases
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+permissions: {}
 
 concurrency:
   group: pages
@@ -22,8 +19,13 @@ jobs:
   build:
     if: github.event_name != 'schedule' || github.repository == 'thunderbird/thunderbird-release-docs'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read  # Required to checkout the repository.
+      pages: read     # Required by configure-pages to read the Pages config.
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      with:
+        persist-credentials: false
     - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2  # v10.3.3
     - name: Generate on-schedule report
       working-directory: reports
@@ -37,6 +39,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write     # Required to deploy to GitHub Pages.
+      id-token: write  # Required to verify the deployment originates from this workflow.
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

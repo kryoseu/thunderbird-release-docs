@@ -143,7 +143,7 @@ Treeherder. To run it:
 
    I'll be completing the Thunderbird beta -> release merge today.
 
-   - elease to <RELEASE_VER>
+   - release to <RELEASE_VER>
 
    The merge will be performed via automation.
 
